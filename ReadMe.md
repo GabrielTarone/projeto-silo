@@ -3,10 +3,15 @@
 # Integrantes
 
 Bruno Anselmo da Silva			    RM: 566521
+
 Fernando de Almeida Godoi Martines 	RM: 564820
+
 Gabriel Ber Soares Tarone			RM: 563520
+
 Guilherme de Freitas Salgado		RM: 562494
+
 Vinicius Ribeiro Dias				RM: 566468 
+
 
 ## Descrição:
 
