@@ -6,21 +6,21 @@
 // CONFIGURAÇÕES WI-FI
 // =========================
 
-const char* ssid = "NET_2G5CA23A";
-const char* password = "515CA23A";
+const char *ssid = "Nome_do_wifi";
+const char *password = "senha";
 
 // =========================
 // CONFIGURAÇÕES MQTT
 // =========================
 
-const char* mqtt_broker = "broker.hivemq.com";
+const char *mqtt_broker = "broker.hivemq.com";
 const int mqtt_port = 1883;
 
 // Tópico que será utilizado pelo projeto
-const char* mqtt_topic = "projeto/silo/01/dados";
+const char *mqtt_topic = "projeto/silo/01/dados";
 
-const char* mqtt_username = "";
-const char* mqtt_password = "";
+const char *mqtt_username = "";
+const char *mqtt_password = "";
 
 // =========================
 // OBJETOS
@@ -40,9 +40,11 @@ const unsigned long intervalo = 40000;
 // CONEXÃO MQTT
 // =========================
 
-void conectarMQTT() {
+void conectarMQTT()
+{
 
-  while (!client.connected()) {
+  while (!client.connected())
+  {
 
     Serial.print("Conectando ao MQTT...");
 
@@ -51,16 +53,17 @@ void conectarMQTT() {
     client_id += WiFi.macAddress();
 
     if (client.connect(
-          client_id.c_str(),
-          mqtt_username,
-          mqtt_password
-        )) {
+            client_id.c_str(),
+            mqtt_username,
+            mqtt_password))
+    {
 
       Serial.println(" conectado!");
       Serial.print("Client ID: ");
       Serial.println(client_id);
-
-    } else {
+    }
+    else
+    {
 
       Serial.print(" falhou. Código: ");
       Serial.println(client.state());
@@ -75,7 +78,8 @@ void conectarMQTT() {
 // SETUP
 // =========================
 
-void setup() {
+void setup()
+{
 
   Serial.begin(115200);
 
@@ -88,7 +92,8 @@ void setup() {
 
   WiFi.begin(ssid, password);
 
-  while (WiFi.status() != WL_CONNECTED) {
+  while (WiFi.status() != WL_CONNECTED)
+  {
 
     delay(500);
     Serial.print(".");
@@ -113,17 +118,20 @@ void setup() {
 // LOOP
 // =========================
 
-void loop() {
+void loop()
+{
 
   // Mantém conexão MQTT
-  if (!client.connected()) {
+  if (!client.connected())
+  {
     conectarMQTT();
   }
 
   client.loop();
 
   // Envia dados a cada 5 segundos
-  if (millis() - ultimoEnvio >= intervalo) {
+  if (millis() - ultimoEnvio >= intervalo)
+  {
 
     ultimoEnvio = millis();
 
@@ -161,9 +169,8 @@ void loop() {
     Serial.println(mensagem);
 
     client.publish(
-      mqtt_topic,
-      mensagem.c_str()
-    );
+        mqtt_topic,
+        mensagem.c_str());
 
     Serial.println("Mensagem publicada!");
   }
